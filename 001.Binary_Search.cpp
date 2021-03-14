@@ -63,7 +63,7 @@ int main(void)
 {
 		int result = -1;
 
-		freopen("input.txt", "r", stdin);
+		freopen("001.input.txt", "r", stdin);
 
 		scanf("%d", &N);
 		for (int i = 0; i < N; i++) {
