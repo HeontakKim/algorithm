@@ -66,7 +66,7 @@ int BFS()
 		}
 	}
 
-	// (N, M) 에 도달하지 못하고 종료됨 - 디버깅 필요
+	// Failed to reach (N, M) and terminated - Debugging required
 	return -1;
 }
 
