@@ -6,7 +6,7 @@ char visit[30][30];
 int di[4] = { -1, 0, 1, 0 };
 int dj[4] = { 0, 1, 0, -1 };
 
-int distance=0;
+int distance = 0;
 
 struct Q {
 	int i, j;
@@ -16,8 +16,6 @@ Q q[1000000];
 
 void inputData(void)
 {
-	freopen("input.txt", "r", stdin);
-
 	scanf("%d%d", &N, &M);
 
 	for (int i = 0; i < N; i++) {
@@ -38,7 +36,7 @@ void outputData(void)
 
 int check(int i, int j)
 {
-	if (i < 0 || i > N - 1 || j < 0 || j > N - 1)
+	if (i < 0 || i > N - 1 || j < 0 || j > M - 1)
 		return 1;
 	else if (map[i][j] != '1')
 		return 1;
@@ -53,7 +51,8 @@ void BFS(void)
 {
 	int rp = 0, wp = 0;
 	int ci, cj, clevel;
-	int ni, nj, nlevel;
+	int ni, nj;
+	int level;
 
 	q[wp].i = 0;
 	q[wp].j = 0;
@@ -64,7 +63,7 @@ void BFS(void)
 	while (rp < wp) {
 		ci = q[rp].i;
 		cj = q[rp].j;
-		clevel = q[rp].level;
+		level = q[rp].level;
 		rp++;
 
 		for (int k = 0; k < 4; k++) {
@@ -74,16 +73,13 @@ void BFS(void)
 			if (!check(ni, nj)) {
 				q[wp].i = ni;
 				q[wp].j = nj;
-				q[wp].level = clevel+1;
+				q[wp].level = level + 1;
 				visit[ni][nj] = 1;
+				if (ni == N - 1 && nj == M - 1) distance = q[wp].level + 1;
 				wp++;
-			}
-			if (ni == N && nj == M) {
-				distance = q[wp].level +1;
-			}
+			}	
 		}
-		printf("%d %d %d %d %d \n", ci, cj, clevel, rp, wp); 
-		clevel++;
+		level++;
 	}
 }
 
